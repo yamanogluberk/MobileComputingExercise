@@ -32,5 +32,10 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+
+        val data = listOf("Oulu", "Helsinki", "Tampere")
+        val adapter = ReminderAdapter(this, data)
+        lv_main.adapter = adapter
+
     }
 }
