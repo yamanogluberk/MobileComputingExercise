@@ -18,16 +18,18 @@ class ReminderAdapter(context: Context, private val list: List<TableReminder>) :
         val view = inflater.inflate(R.layout.item_list_view, p2, false)
         view.tvMessage.text = list[position].message
 
-        if(list[position].time!=null) {
+        if (list[position].time != null) {
             val sdf = SimpleDateFormat("HH:mm dd.MM.yyyy")
             sdf.timeZone = TimeZone.getDefault()
 
             val time = list[position].time
             val readableTime = sdf.format(time)
             view.tvTrigger.text = readableTime
-        }else{
-            view.tvTrigger.text = "location"
+
+        } else if (list[position].location != null) {
+            view.tvTrigger.text = list[position].location
         }
+
         return view
     }
 
@@ -36,7 +38,8 @@ class ReminderAdapter(context: Context, private val list: List<TableReminder>) :
     }
 
     override fun getItemId(p0: Int): Long {
-return 0   }
+        return p0.toLong()
+    }
 
     override fun getCount(): Int {
         return list.size

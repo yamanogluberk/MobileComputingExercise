@@ -1,9 +1,13 @@
 package com.yamanoglu.mobilecomputingexercise
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
@@ -34,6 +38,34 @@ class MainActivity : AppCompatActivity() {
                 fab_map.animate().translationY(0f)
 
             }
+        }
+
+        lv_main.setOnItemClickListener{ _, _, pos ,_->
+            val selected = lv_main.adapter.getItem(pos) as TableReminder
+
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Delete Reminder?")
+                .setMessage(selected.message)
+                .setPositiveButton("Delete"){_,_ ->
+                    if(selected.time!=null){
+                        val manager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                        val intent = Intent(this,ReminderReceiver::class.java)
+                        val pending = PendingIntent.getBroadcast(this, selected.uuid!!,intent, PendingIntent.FLAG_ONE_SHOT)
+                        manager.cancel(pending)
+
+                        doAsync {
+                            val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "reminders").build()
+                            db.reminderDao().delete(selected)
+                            db.close()
+                            refreshList()
+                        }
+                    }
+                }
+                .setNegativeButton("Cancel"){dialog,_ ->
+                    dialog.dismiss()
+                }
+                .show()
+
         }
     }
 
