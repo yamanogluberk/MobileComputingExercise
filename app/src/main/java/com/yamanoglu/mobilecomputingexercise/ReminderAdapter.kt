@@ -1,5 +1,6 @@
 package com.yamanoglu.mobilecomputingexercise
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ class ReminderAdapter(context: Context, private val list: List<TableReminder>) :
     private val inflater: LayoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
+    @SuppressLint("SimpleDateFormat")
     override fun getView(position: Int, p1: View?, p2: ViewGroup?): View {
         val view = inflater.inflate(R.layout.item_list_view, p2, false)
         view.tvMessage.text = list[position].message

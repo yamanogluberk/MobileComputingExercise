@@ -20,7 +20,7 @@ class TimeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_time)
 
         button.setOnClickListener {
-            val calendar = GregorianCalendar(
+            @Suppress("DEPRECATION") val calendar = GregorianCalendar(
                 datepicker.year,
                 datepicker.month,
                 datepicker.dayOfMonth,

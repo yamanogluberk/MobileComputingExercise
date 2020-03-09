@@ -12,8 +12,7 @@ class GeofenceReceiver : BroadcastReceiver() {
         val geofencingTransition = geofencingEvent.geofenceTransition
 
         if (geofencingTransition == Geofence.GEOFENCE_TRANSITION_ENTER || geofencingTransition == Geofence.GEOFENCE_TRANSITION_DWELL) {
-            val uuid = intent!!.getIntExtra("uuid", 0)
-            val message = intent.getStringExtra("message")
+            val message = intent!!.getStringExtra("message")
 
             MainActivity.showNotification(context!!,message!!)
         }

@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
                     context.getString(R.string.app_name),
                     NotificationManager.IMPORTANCE_DEFAULT
                 ).apply {
-                    description = context?.getString(R.string.app_name)
+                    description = context.getString(R.string.app_name)
                 }
                 notificationManager.createNotificationChannel(channel)
             }

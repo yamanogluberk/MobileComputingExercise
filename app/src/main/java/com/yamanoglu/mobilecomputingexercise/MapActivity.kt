@@ -38,7 +38,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     val GEOFENCE_ID = "GEOFENCE_ID"
     val GEOFENCE_RADIUS = 500
-    val GEOFENCE_EXPIRATION = 120 * 24 * 60 * 60 * 1000
+    val GEOFENCE_EXPIRATION : Long = 120 * 24 * 60 * 60 * 1000
     val GEOFENCE_DELAY = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {

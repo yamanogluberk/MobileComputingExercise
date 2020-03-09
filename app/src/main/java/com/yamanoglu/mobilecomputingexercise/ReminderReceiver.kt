@@ -12,7 +12,7 @@ class ReminderReceiver : BroadcastReceiver() {
         val uuid = intent.getIntExtra("uuid",0)
         val text = intent.getStringExtra("message")
 
-        MainActivity.showNotification(context,text)
+        MainActivity.showNotification(context,text!!)
 
         doAsync {
             val db = Room.databaseBuilder(context, AppDatabase::class.java, "reminders").build()
