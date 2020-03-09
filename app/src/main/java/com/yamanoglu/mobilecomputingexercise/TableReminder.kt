@@ -11,13 +11,17 @@ data class TableReminder(
 )
 
 @Dao
-interface ReminderDao{
-    @Transaction @Insert
-    fun insert(reminder: TableReminder)
+interface ReminderDao {
+    @Transaction
+    @Insert
+    fun insert(reminder: TableReminder): Long
 
     @Delete
     fun delete(reminder: TableReminder)
 
     @Query("SELECT * FROM reminders")
-    fun getReminders():List<TableReminder>
+    fun getReminders(): List<TableReminder>
+
+    @Query("DELETE FROM reminders WHERE uuid= :id")
+    fun deleteWithUuid(id: Int)
 }
